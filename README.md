@@ -1,8 +1,10 @@
 # BundlerDiffgems
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bundler_diffgems`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Gem Version](https://badge.fury.io/rb/bundler_diffgems.svg)](https://badge.fury.io/rb/bundler_diffgems)
+[![Build Status](https://travis-ci.org/sinsoku/bundler_diffgems.svg?branch=master)](https://travis-ci.org/sinsoku/bundler_diffgems)
+[![codecov](https://codecov.io/gh/sinsoku/bundler_diffgems/branch/master/graph/badge.svg)](https://codecov.io/gh/sinsoku/bundler_diffgems)
 
-TODO: Delete this and the text above, and describe your gem
+BundlerDiffgems show changes with GitHub comapre view urls.
 
 ## Installation
 
@@ -22,7 +24,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+$ bundle update
+Fetching gem metadata from https://rubygems.org
+(...updating
+$ bundle diffgems
+rake: 11.3.0 => 12.0.0 - https://github.com/ruby/rake/compare/v11.3.0...v12.0.0
+rspec: 3.5.0 =>
+```
 
 ## Development
 

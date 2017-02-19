@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['sinsoku']
   spec.email         = ['sinsoku.listy@gmail.com']
 
-  spec.summary       = ''
-  spec.description   = ''
+  spec.summary       = 'A gem support your "bundle update"'
+  spec.description   = 'BundlerDiffgems show changes with GitHub comapre view urls.'
   spec.homepage      = 'https://github.com/sinsoku/bundler_diffgems'
   spec.license       = 'MIT'
 
