@@ -46,11 +46,23 @@ module BundlerDiffgems
       File.read(file_name)
     end
 
-    def parse_options!
+    def parse_options! # rubocop:disable Metrics/MethodLength
       opt = OptionParser.new
-      opt.on('-c', '--comit=COMMIT') { |val| @commit = val }
-      opt.on('-f', '--format=FORMATTER') { |val| @format = val.to_sym }
-      opt.on('--escape-json') { |val| @escape_json = val }
+      opt.banner = 'Usage: bundle diffgems [options]'
+      opt.on('-c', '--commit COMMIT', 'Specify a commit') { |val| @commit = val }
+      formatter_desc = [
+        'Choose a formatter',
+        '  default',
+        '  md_table'
+      ]
+      opt.on('-f', '--format FORMATTER', *formatter_desc) { |val| @format = val.to_sym }
+      opt.on('--escape-json', 'Escape output as a JSON string') do |val|
+        @escape_json = val
+      end
+      opt.on('-v', '--version', 'Display the version') do
+        puts BundlerDiffgems::VERSION
+        exit
+      end
       options = opt.parse(@args)
       @commit ||= options.shift
     end

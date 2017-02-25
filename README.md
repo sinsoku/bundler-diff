@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/sinsoku/bundler_diffgems.svg?branch=master)](https://travis-ci.org/sinsoku/bundler_diffgems)
 [![codecov](https://codecov.io/gh/sinsoku/bundler_diffgems/branch/master/graph/badge.svg)](https://codecov.io/gh/sinsoku/bundler_diffgems)
 
-BundlerDiffgems show changes with GitHub comapre view urls.
+A bundler subcommand that use Git, compare with the previous Gemfile.lock, and display updated gems and comapre links.
 
 ## Installation
 
@@ -24,13 +24,37 @@ Or install it yourself as:
 
 ## Usage
 
+Run `bundle update` as usual:
+
 ```
 $ bundle update
 Fetching gem metadata from https://rubygems.org
-(...updating
+...
+```
+
+Then `bundle diffgems`:
+
+```
 $ bundle diffgems
 rake: 11.3.0 => 12.0.0 - https://github.com/ruby/rake/compare/v11.3.0...v12.0.0
 rspec: 3.5.0 =>
+...
+```
+
+You can see updated gems with compare links.
+
+## Options
+
+Options are:
+
+```
+Usage: bundle diffgems [options]
+    -c, --commit COMMIT              Specify a commit
+    -f, --format FORMATTER           Choose a formatter
+                                       default
+                                       md_table
+        --escape-json                Escape output as a JSON string
+    -v, --version                    Display the version
 ```
 
 ## Development
