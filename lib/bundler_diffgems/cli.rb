@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'gems_comparator'
+require 'json'
 require 'optparse'
 
 module BundlerDiffgems
@@ -20,7 +21,9 @@ module BundlerDiffgems
     def invoke
       parse_options!
       gems = GemsComparator.compare(before_lockfile, after_lockfile)
-      puts formatter.new.render(gems)
+      output = formatter.new.render(gems)
+      output = JSON.dump(output) if @escape_json
+      puts output
     rescue => e
       puts e.inspect
     end
@@ -45,6 +48,7 @@ module BundlerDiffgems
       opt = OptionParser.new
       opt.on('-c', '--comit=COMMIT') { |val| @commit = val }
       opt.on('-f', '--format=FORMATTER') { |val| @format = val.to_sym }
+      opt.on('--escape-json') { |val| @escape_json = val }
       options = opt.parse(@args)
       @commit ||= options.shift
     end
