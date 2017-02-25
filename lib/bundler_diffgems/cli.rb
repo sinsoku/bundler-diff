@@ -20,6 +20,8 @@ module BundlerDiffgems
 
     def invoke
       parse_options!
+      set_access_token!
+
       gems = GemsComparator.compare(before_lockfile, after_lockfile)
       output = formatter.new.render(gems)
       output = JSON.dump(output) if @escape_json
@@ -51,6 +53,19 @@ module BundlerDiffgems
       opt.on('--escape-json') { |val| @escape_json = val }
       options = opt.parse(@args)
       @commit ||= options.shift
+    end
+
+    def set_access_token!
+      return if GemsComparator.config.client.access_token
+      hub_config_path = "#{ENV['HOME']}/.config/hub"
+      return unless File.exist?(hub_config_path)
+
+      yaml = YAML.load_file(hub_config_path)
+      oauth_token = yaml.dig('github.com', 0, 'oauth_token')
+      return if oauth_token.nil?
+      GemsComparator.configure do |config|
+        config.client = Octokit::Client.new(access_token: oauth_token)
+      end
     end
 
     def commit
