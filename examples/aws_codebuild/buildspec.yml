@@ -1,0 +1,12 @@
+version: 0.1
+
+phases:
+  pre_build:
+    commands:
+      - gem install bundler
+      - gem install bundler_diffgems
+      - git config user.name bundler_bot
+      - git config user.email mail@example.com
+  build:
+    commands:
+      - ./bin/update_gems

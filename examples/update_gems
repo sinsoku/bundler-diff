@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+# TODO: You need to edit these variables
+REPO=owner/repo
+BASE_BRANCH=master
+
+if [ -z "${GITHUB_TOKEN}" ]
+then
+  echo 'usage: GITHUB_TOKEN=<your 40 char token> update_gems'
+  exit 1
+fi
+
+# Update gems
+bundle update
+
+# Push a commit
+NOW=$(date +'%Y%m%d%H%M%S')
+HEAD_BRANCH="gems/${NOW}"
+BODY=$(bundle diffgems --escape-json -f md_table)
+git checkout -b ${HEAD_BRANCH}
+git add -u
+git commit -m "Update gems ${NOW}"
+git push origin ${HEAD_BRANCH}
+
+# Create a pull request
+API_URL="https://api.github.com/repos/${REPO}/pulls"
+echo '{ "title": "Update gems '"${NOW}"'", "head": "'"${HEAD_BRANCH}"'", "base": "'"${BASE_BRANCH}"'", "body": '${BODY}' }' |
+  curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST --data-binary @- ${API_URL}
