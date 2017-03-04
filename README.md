@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/sinsoku/bundler_diffgems.svg?branch=master)](https://travis-ci.org/sinsoku/bundler_diffgems)
 [![codecov](https://codecov.io/gh/sinsoku/bundler_diffgems/branch/master/graph/badge.svg)](https://codecov.io/gh/sinsoku/bundler_diffgems)
 
-A bundler subcommand that use Git, compare with the previous Gemfile.lock, and display updated gems and compare links.
+A bundler subcommand that uses Git, compare with the previous Gemfile.lock, and display updated gems and compare links.
 
 ## Installation
 
