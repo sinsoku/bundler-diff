@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module BundlerDiffgems
   module Formatter
     class Default
@@ -10,7 +11,7 @@ module BundlerDiffgems
 
       def render_line(gem)
         lines = []
-        lines << format('%s: %s =>', gem[:name], gem[:before])
+        lines << format('%<name>s: %<before>s =>', gem)
         lines << " #{gem[:after]}" if gem[:after].size.positive?
         lines << " - #{gem[:compare_url]}" if gem[:compare_url]
         lines.join

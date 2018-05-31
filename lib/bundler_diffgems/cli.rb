@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'gems_comparator'
 require 'json'
 require 'optparse'
@@ -26,7 +27,7 @@ module BundlerDiffgems
       output = formatter.new.render(gems)
       output = JSON.dump(output) if @escape_json
       puts output
-    rescue => e
+    rescue StandardError => e
       puts e.inspect
     end
 

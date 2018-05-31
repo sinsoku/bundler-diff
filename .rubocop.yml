@@ -13,3 +13,6 @@ Metrics/BlockLength:
 
 Metrics/LineLength:
   Max: 90
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false

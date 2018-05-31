@@ -1,8 +1,9 @@
 # frozen_string_literal: true
+
 module BundlerDiffgems
   module Formatter
     class MdTable
-      ITEMS = %w(gem before after compare).freeze
+      ITEMS = %w[gem before after compare].freeze
       HEADER = "| #{ITEMS.join(' | ')} |"
       HR = "#{'|---' * ITEMS.size}|"
       TEMPLATE = "#{'| %s ' * ITEMS.size}|"
@@ -35,7 +36,7 @@ module BundlerDiffgems
         case gem[:compare_url]
         when /master$/
           ':warning:'
-        when URI.regexp
+        when URI::DEFAULT_PARSER.make_regexp
           ':white_check_mark:'
         when nil
           ':x:'

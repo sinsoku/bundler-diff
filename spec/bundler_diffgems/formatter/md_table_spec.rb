@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'spec_helper'
 
 module BundlerDiffgems
@@ -37,14 +38,14 @@ module BundlerDiffgems
       let(:gems) { [error_gem, rake_gem, rspec_gem, warning_gem] }
 
       it 'should return output formatted as md_table' do
-        expected = <<~EOF.chomp
+        expected = <<~TABLE.chomp
           | gem | before | after | compare |
           |---|---|---|---|
           | error_gem | 0.1.0 | 0.2.0 | :bug: RuntimeError |
           | [rake](#{RAKE_URL}) | 11.3.0 | 12.0.0 | :white_check_mark: #{RAKE_URL} |
           | rspec | 3.5.0 |  | :x:  |
           | warning_gem | 0.1.0 | 0.2.0 | :warning: #{WARNING_URL} |
-        EOF
+        TABLE
         expect(formatter.render(gems)).to eq expected
       end
     end

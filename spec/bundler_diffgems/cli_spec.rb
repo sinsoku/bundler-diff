@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'spec_helper'
 
 module BundlerDiffgems
@@ -28,10 +29,10 @@ module BundlerDiffgems
       end
 
       it 'should display the gem changes' do
-        expected = <<~EOF
+        expected = <<~CHANGES
           rake: 11.3.0 => 12.0.0 - #{RAKE_URL}
           rspec: 3.5.0 =>
-        EOF
+        CHANGES
         expect { cli.invoke }.to output(expected).to_stdout
         expect(GemsComparator).to have_received(:compare)
           .with('before_lockfile', 'after_lockfile')
