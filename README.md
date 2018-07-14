@@ -1,8 +1,8 @@
-# BundlerDiffgems
+# Bundler Diff
 
-[![Gem Version](https://badge.fury.io/rb/bundler_diffgems.svg)](https://badge.fury.io/rb/bundler_diffgems)
-[![Build Status](https://travis-ci.org/sinsoku/bundler_diffgems.svg?branch=master)](https://travis-ci.org/sinsoku/bundler_diffgems)
-[![codecov](https://codecov.io/gh/sinsoku/bundler_diffgems/branch/master/graph/badge.svg)](https://codecov.io/gh/sinsoku/bundler_diffgems)
+[![Gem Version](https://badge.fury.io/rb/bundler-diff.svg)](https://badge.fury.io/rb/bundler-diff)
+[![Build Status](https://travis-ci.org/sinsoku/bundler-diff.svg?branch=master)](https://travis-ci.org/sinsoku/bundler-diff)
+[![codecov](https://codecov.io/gh/sinsoku/bundler-diff/branch/master/graph/badge.svg)](https://codecov.io/gh/sinsoku/bundler-diff)
 
 A bundler subcommand that uses Git, compare with the previous Gemfile.lock, and display updated gems and compare links.
 
@@ -11,7 +11,7 @@ A bundler subcommand that uses Git, compare with the previous Gemfile.lock, and 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bundler_diffgems'
+gem 'bundler-diff'
 ```
 
 And then execute:
@@ -20,7 +20,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install bundler_diffgems
+    $ gem install bundler-diff
 
 ## Usage
 
@@ -32,10 +32,10 @@ Fetching gem metadata from https://rubygems.org
 ...
 ```
 
-Then `bundle diffgems`:
+Then `bundle diff`:
 
 ```
-$ bundle diffgems
+$ bundle diff
 rake: 11.3.0 => 12.0.0 - https://github.com/ruby/rake/compare/v11.3.0...v12.0.0
 rspec: 3.5.0 =>
 ...
@@ -48,7 +48,7 @@ You can see updated gems with compare links.
 Options are:
 
 ```
-Usage: bundle diffgems [options]
+Usage: bundle diff [options]
     -c, --commit COMMIT              Specify a commit
     -f, --format FORMATTER           Choose a formatter
                                        default
@@ -65,7 +65,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/sinsoku/bundler_diffgems. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/sinsoku/bundler-diff. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

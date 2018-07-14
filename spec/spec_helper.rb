@@ -9,4 +9,4 @@ if ENV['CI'] == 'true'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
-require 'bundler_diffgems'
+require 'bundler-diff'

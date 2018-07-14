@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-module BundlerDiffgems
+module BundlerDiff
   RSpec.describe CLI do
     describe '#invoke' do
       RAKE_URL = 'https://github.com/ruby/rake/compare/v11.3.0...v12.0.0'

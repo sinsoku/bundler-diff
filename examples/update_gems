@@ -17,7 +17,7 @@ bundle update
 # Push a commit
 NOW=$(date +'%Y%m%d%H%M%S')
 HEAD_BRANCH="gems/${NOW}"
-BODY=$(bundle diffgems --escape-json -f md_table)
+BODY=$(bundle diff --escape-json -f md_table)
 git checkout -b ${HEAD_BRANCH}
 git add -u
 git commit -m "Update gems ${NOW}"

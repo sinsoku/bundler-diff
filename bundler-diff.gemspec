@@ -2,17 +2,17 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bundler_diffgems/version'
+require 'bundler_diff/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'bundler_diffgems'
-  spec.version       = BundlerDiffgems::VERSION
+  spec.name          = 'bundler-diff'
+  spec.version       = BundlerDiff::VERSION
   spec.authors       = ['sinsoku']
   spec.email         = ['sinsoku.listy@gmail.com']
 
   spec.summary       = 'A gem support your "bundle update"'
-  spec.description   = 'BundlerDiffgems show changes with GitHub comapre view urls.'
-  spec.homepage      = 'https://github.com/sinsoku/bundler_diffgems'
+  spec.description   = 'BundlerDiff show changes with GitHub comapre view urls.'
+  spec.homepage      = 'https://github.com/sinsoku/bundler-diff'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

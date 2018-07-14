@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module BundlerDiffgems
+module BundlerDiff
   module Formatter
     class Default
       def render(gems)

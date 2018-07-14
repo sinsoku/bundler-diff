@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-module BundlerDiffgems
+module BundlerDiff
   RSpec.describe Formatter::MdTable do
     let(:formatter) { Formatter::MdTable.new }
 

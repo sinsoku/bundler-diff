@@ -4,7 +4,7 @@ require 'gems_comparator'
 require 'json'
 require 'optparse'
 
-module BundlerDiffgems
+module BundlerDiff
   class CLI
     DEFAULT_OPTIONS = {
       commit: 'HEAD',
@@ -61,7 +61,7 @@ module BundlerDiffgems
         @escape_json = val
       end
       opt.on('-v', '--version', 'Display the version') do
-        puts BundlerDiffgems::VERSION
+        puts BundlerDiff::VERSION
         exit
       end
       options = opt.parse(@args)
@@ -87,7 +87,7 @@ module BundlerDiffgems
 
     def formatter
       format = @format || DEFAULT_OPTIONS[:format]
-      BundlerDiffgems.formatters[format] || Formatter::Default
+      BundlerDiff.formatters[format] || Formatter::Default
     end
   end
 end

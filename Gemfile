@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in bundler_diffgems.gemspec
+# Specify your gem's dependencies in bundler-diff.gemspec
 gemspec
 
 gem 'codecov', require: false
