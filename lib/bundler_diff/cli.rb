@@ -69,7 +69,7 @@ module BundlerDiff
     end
 
     def set_access_token!
-      access_token = GemsComparator.config.client.access_token || hub_token
+      access_token = ENV['GITHUB_TOKEN'] || hub_token
       return if access_token.nil?
 
       GemsComparator.configure do |config|
