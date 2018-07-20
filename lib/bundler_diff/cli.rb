@@ -69,16 +69,20 @@ module BundlerDiff
     end
 
     def set_access_token!
-      return if GemsComparator.config.client.access_token
+      access_token = GemsComparator.config.client.access_token || hub_token
+      return if access_token.nil?
+
+      GemsComparator.configure do |config|
+        config.client = Octokit::Client.new(access_token: access_token)
+      end
+    end
+
+    def hub_token
       hub_config_path = "#{ENV['HOME']}/.config/hub"
       return unless File.exist?(hub_config_path)
 
       yaml = YAML.load_file(hub_config_path)
-      oauth_token = yaml.dig('github.com', 0, 'oauth_token')
-      return if oauth_token.nil?
-      GemsComparator.configure do |config|
-        config.client = Octokit::Client.new(access_token: oauth_token)
-      end
+      yaml.dig('github.com', 0, 'oauth_token')
     end
 
     def commit
