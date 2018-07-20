@@ -32,6 +32,10 @@ module BundlerDiff
       opt.on('--escape-json', 'Escape output as a JSON string') do |val|
         options[:escape_json] = val
       end
+      opt.on('--access-token ACCESS_TOKEN', 'Set access token for GitHub API') do |val|
+        options[:access_token] = val
+      end
+
       opt.on('-v', '--version', 'Display the version') { options[:version] = true }
 
       remaining_args = opt.parse(args)

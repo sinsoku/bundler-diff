@@ -24,5 +24,10 @@ RSpec.describe BundlerDiff do
       subject { BundlerDiff.parse_options('--escape_json') }
       it { is_expected.to include escape_json: true }
     end
+
+    context 'when args is "--access-token abc"' do
+      subject { BundlerDiff.parse_options(%w[--access-token abc]) }
+      it { is_expected.to include access_token: 'abc' }
+    end
   end
 end

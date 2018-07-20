@@ -56,7 +56,8 @@ module BundlerDiff
       end
       @options[:commit] ||= DEFAULT_OPTIONS[:commit]
       @options[:format] ||= DEFAULT_OPTIONS[:format]
-      @options[:access_token] ||= ENV['GITHUB_TOKEN'] || hub_token
+      @options[:access_token] ||=
+        ENV['BUNDLER_DIFF_GITHUB_TOKEN'] || ENV['GITHUB_TOKEN'] || hub_token
     end
 
     def set_access_token!
