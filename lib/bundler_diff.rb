@@ -19,7 +19,7 @@ module BundlerDiff
       options = {}
 
       opt = OptionParser.new
-      opt.banner = 'Usage: bundle diffgems [options]'
+      opt.banner = 'Usage: bundle diff [options]'
       opt.on('-c', '--commit COMMIT', 'Specify a commit') { |val| options[:commit] = val }
       formatter_desc = [
         'Choose a formatter',
