@@ -25,7 +25,7 @@ module BundlerDiff
 
       gems = GemsComparator.compare(before_lockfile, after_lockfile)
       output = formatter.new.render(gems)
-      output = JSON.dump(output) if @escape_json
+      output = JSON.dump(output) if @options[:escape_json]
       puts output
     rescue StandardError => e
       puts e.inspect
@@ -47,46 +47,41 @@ module BundlerDiff
       File.read(file_name)
     end
 
-    def parse_options! # rubocop:disable Metrics/MethodLength
-      opt = OptionParser.new
-      opt.banner = 'Usage: bundle diffgems [options]'
-      opt.on('-c', '--commit COMMIT', 'Specify a commit') { |val| @commit = val }
-      formatter_desc = [
-        'Choose a formatter',
-        '  default',
-        '  md_table'
-      ]
-      opt.on('-f', '--format FORMATTER', *formatter_desc) { |val| @format = val.to_sym }
-      opt.on('--escape-json', 'Escape output as a JSON string') do |val|
-        @escape_json = val
-      end
-      opt.on('-v', '--version', 'Display the version') do
+    def parse_options!
+      @options = BundlerDiff.parse_options(@args)
+
+      if @options.key?(:version)
         puts BundlerDiff::VERSION
         exit
       end
-      options = opt.parse(@args)
-      @commit ||= options.shift
+      @options[:commit] ||= DEFAULT_OPTIONS[:commit]
+      @options[:format] ||= DEFAULT_OPTIONS[:format]
+      @options[:access_token] ||=
+        ENV['BUNDLER_DIFF_GITHUB_TOKEN'] || ENV['GITHUB_TOKEN'] || hub_token
     end
 
     def set_access_token!
-      return if GemsComparator.config.client.access_token
+      return if @options[:access_token].nil?
+
+      GemsComparator.configure do |config|
+        config.client = Octokit::Client.new(access_token: @options[:access_token])
+      end
+    end
+
+    def hub_token
       hub_config_path = "#{ENV['HOME']}/.config/hub"
       return unless File.exist?(hub_config_path)
 
       yaml = YAML.load_file(hub_config_path)
-      oauth_token = yaml.dig('github.com', 0, 'oauth_token')
-      return if oauth_token.nil?
-      GemsComparator.configure do |config|
-        config.client = Octokit::Client.new(access_token: oauth_token)
-      end
+      yaml.dig('github.com', 0, 'oauth_token')
     end
 
     def commit
-      @commit || DEFAULT_OPTIONS[:commit]
+      @options[:commit]
     end
 
     def formatter
-      format = @format || DEFAULT_OPTIONS[:format]
+      format = @options[:format]
       BundlerDiff.formatters[format] || Formatter::Default
     end
   end

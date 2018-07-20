@@ -54,6 +54,7 @@ Usage: bundle diff [options]
                                        default
                                        md_table
         --escape-json                Escape output as a JSON string
+        --access-token ACCESS_TOKEN  Set access token for GitHub API
     -v, --version                    Display the version
 ```
 
