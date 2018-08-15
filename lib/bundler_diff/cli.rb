@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require 'bundler'
 require 'gems_comparator'
 require 'json'
 require 'optparse'
+require 'pathname'
 
 module BundlerDiff
   class CLI
@@ -33,18 +35,18 @@ module BundlerDiff
 
     private
 
-    def file_name
-      @file_name ||= File.exist?('gems.locked') ? 'gems.locked' : 'Gemfile.lock'
+    def file_path
+      @file_path ||= Bundler.default_lockfile.relative_path_from(Pathname.pwd)
     end
 
     def before_lockfile
-      `git show #{commit}:#{file_name}`.tap do
+      `git show #{commit}:#{file_path}`.tap do
         raise unless $?.success? # rubocop:disable Style/SpecialGlobalVars
       end
     end
 
     def after_lockfile
-      File.read(file_name)
+      File.read(file_path)
     end
 
     def parse_options!
