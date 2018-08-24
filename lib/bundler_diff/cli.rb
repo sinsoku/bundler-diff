@@ -40,7 +40,7 @@ module BundlerDiff
     end
 
     def before_lockfile
-      `git show #{commit}:#{file_path}`.tap do
+      `git show #{commit}:./#{file_path}`.tap do
         raise unless $?.success? # rubocop:disable Style/SpecialGlobalVars
       end
     end
