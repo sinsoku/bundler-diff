@@ -18,7 +18,7 @@ module BundlerDiff
       def render_row(gem)
         name = format_name(gem)
         before, after = gem.fetch_values(:before, :after)
-        compare_url = "#{icon_for(gem)} #{gem[:compare_url]}"
+        compare_url = "#{icon_for(gem)} #{url_for(gem)}"
 
         format TEMPLATE, name, before, after, compare_url
       end
@@ -42,6 +42,18 @@ module BundlerDiff
           ':x:'
         else
           ':bug:'
+        end
+      end
+
+      def url_for(gem)
+        case icon_for(gem)
+        when ':warning:', ':white_check_mark:'
+          before, after = gem.fetch_values(:before, :after)
+          "[#{gem[:name]}@ #{before}...#{after}](#{gem[:compare_url]})"
+        when ':bug:'
+          gem[:compare_url]
+        else
+          ''
         end
       end
     end
