@@ -42,8 +42,8 @@ module BundlerDiff
           | gem | before | after | compare |
           |---|---|---|---|
           | error_gem | 0.1.0 | 0.2.0 | :bug: RuntimeError |
-          | [rake](#{RAKE_URL}) | 11.3.0 | 12.0.0 | :white_check_mark: [rake@ 11.3.0...12.0.0](#{RAKE_URL}) |
-          | rspec | 3.5.0 |  | :x:  |
+          | [rake](#{RAKE_URL}) | 11.3.0 | 12.0.0 | [rake@ 11.3.0...12.0.0](#{RAKE_URL}) |
+          | rspec | 3.5.0 |  | Failed to find projects GitHub URL |
           | warning_gem | 0.1.0 | 0.2.0 | :warning: [warning_gem@ 0.1.0...0.2.0](#{WARNING_URL}) |
         TABLE
         expect(formatter.render(gems)).to eq expected
