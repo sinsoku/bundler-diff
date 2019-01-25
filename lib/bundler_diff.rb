@@ -2,6 +2,7 @@
 
 require 'parallel'
 require 'bundler_diff/cli'
+require 'bundler_diff/update_to_pull_request'
 require 'bundler_diff/formatter/default'
 require 'bundler_diff/formatter/md_table'
 require 'bundler_diff/version'
