@@ -18,7 +18,7 @@ module BundlerDiff
       def render_row(gem)
         name = format_name(gem)
         before, after = gem.fetch_values(:before, :after)
-        compare_url = "#{icon_for(gem)} #{url_for(gem)}"
+        compare_url = [icon_for(gem), url_for(gem)].compact.join ' '
 
         format TEMPLATE, name, before, after, compare_url
       end
@@ -32,28 +32,39 @@ module BundlerDiff
         end
       end
 
-      def icon_for(gem)
+      def state_for(gem)
         case gem[:compare_url]
         when /master$/
-          ':warning:'
+          :warning
         when URI::DEFAULT_PARSER.make_regexp
-          ':white_check_mark:'
+          :success
         when nil
-          ':x:'
+          :failure
+        else
+          :error
+        end
+      end
+
+      def icon_for(gem)
+        case state_for(gem)
+        when :warning
+          ':warning:'
+        when :success
+          nil
+        when :failure
+          'Failed to find projects GitHub URL'
         else
           ':bug:'
         end
       end
 
       def url_for(gem)
-        case icon_for(gem)
-        when ':warning:', ':white_check_mark:'
+        case state_for(gem)
+        when :warning, :success
           before, after = gem.fetch_values(:before, :after)
           "[#{gem[:name]}@ #{before}...#{after}](#{gem[:compare_url]})"
-        when ':bug:'
+        when :error
           gem[:compare_url]
-        else
-          ''
         end
       end
     end
